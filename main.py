@@ -72,6 +72,17 @@ async def setprefix(ctx, prefix=None):
                         "$set": {"prefix": prefix}}, upsert=True)
         await ctx.reply("**Prefix has been changed to:** `{}`".format(prefix))
 
+@client.slash_command(name="setprefix", description="Set a custom prefix")
+@commands.has_permissions(manage_guild=True)
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def setprefix(ctx, prefix=None):
+    if prefix is None:
+        await ctx.respond("Please enter a prefix!", ephemeral=5)
+    else:
+        coll.update_one({"_id": ctx.guild.id}, {
+                        "$set": {"prefix": prefix}}, upsert=True)
+        await ctx.respond("**Prefix has been changed to:** `{}`".format(prefix))
+
 
 client.loop.create_task(status())
 client.run(token)
