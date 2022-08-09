@@ -53,7 +53,7 @@ async def status():
 
 @client.event
 async def on_guild_join(guild):
-    coll.insert_one({"_id": guild.id, "prefix": "cb!"})
+    coll.insert_one({"_id": guild.id, "prefix": "sk!"})
 
 
 @client.event
