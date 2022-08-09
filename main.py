@@ -53,6 +53,8 @@ async def status():
 
 @client.event
 async def on_guild_join(guild):
+    if guild.system_channel:
+        await guild.system_channel.send(f'Thanks for inviting Skytrek to **{guild.name}**. Also, please be sure to keep the `Skytrek ` role in the top of the role order if you want maximum protection. **To change the prefix**, do `sk!setprefix (your-prefix)` or /seprefix (your-prefix).If you have any issues, join https://discord.gg/BcgY4qdQau')
     coll.insert_one({"_id": guild.id, "prefix": "sk!"})
 
 
